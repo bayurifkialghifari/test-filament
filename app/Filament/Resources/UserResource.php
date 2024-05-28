@@ -26,17 +26,17 @@ class UserResource extends Resource
                 TextInput::make('email')->email()->required(),
                 TextInput::make('password')->password()->required()->visibleOn('create'),
                 Select::make('roles')->multiple()->relationship('roles', 'name')->required(),
-            ]);
+            ])->columns(1);
     }
 
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                TextColumn::make('roles.name'),
-                TextColumn::make('name'),
-                TextColumn::make('email'),
-                TextColumn::make('created_at'),
+                TextColumn::make('roles.name')->searchable()->sortable(),
+                TextColumn::make('name')->searchable()->sortable(),
+                TextColumn::make('email')->searchable()->sortable(),
+                TextColumn::make('created_at')->searchable()->sortable(),
             ])
             ->filters([
             ])
